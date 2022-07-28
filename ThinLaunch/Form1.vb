@@ -1,8 +1,30 @@
 ﻿Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Check_Language()
         Process.Start("cmd", "/c taskkill /f /im explorer.exe && C:\ThinLaunch\Connect.rdp")
     End Sub
 
+        Public Sub Check_Language()
+        Dim LangString = My.Computer.Info.InstalledUICulture.ToString
+        Select Case My.Computer.Info.InstalledUICulture.ToString
+            Case "de-DE"
+                btnshutdown.Text = "Herunterfahren"
+                btnconnect.Text = "Verbinden"
+                btnreboot.Text = "Neu starten"
+                btnemergency.Text = "Notfallmodus"
+            Case "en-en"
+                btnshutdown.Text = "Shutdown"
+                btnconnect.Text = "Connect"
+                btnreboot.Text = "Reboot"
+                btnemergency.Text = "Emergency mode"
+            Case Else
+                btnshutdown.Text = "Shutdown"
+                btnconnect.Text = "Connect"
+                btnreboot.Text = "Reboot"
+                btnemergency.Text = "Emergency mode"
+        End Select
+    End Sub
+    
     Private Sub btnshutdown_Click(sender As Object, e As EventArgs) Handles btnshutdown.Click
         Select Case MessageBox.Show("Möchten Sie den Computer wirklich Herunterfahren?", "ThinLaunch", MessageBoxButtons.YesNo)
             Case Windows.Forms.DialogResult.Yes
