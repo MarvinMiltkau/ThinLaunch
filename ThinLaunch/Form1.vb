@@ -1,7 +1,9 @@
 ﻿Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Check_Language()
-        Process.Start("cmd", "/c taskkill /f /im explorer.exe && C:\ThinLaunch\Connect.rdp")
+               If IO.File.Exists(IO.Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly.Location) & "\Connect.rdp") = True Then
+            Process.Start("cmd", "/c taskkill /f /im explorer.exe &&" & IO.Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly.Location) & "\Connect.rdp")
+        End If
     End Sub
 
         Public Sub Check_Language()
